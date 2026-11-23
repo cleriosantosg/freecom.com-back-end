@@ -1,0 +1,64 @@
+<%- include('../../partials/adminHeader') %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="fw-bold">Gerenciar Empreendedores</h3>
+  <a href="/admin/empreendedores/novo" class="btn btn-success">
+    <i class="bi bi-plus-circle me-1"></i> Novo Empreendedor
+  </a>
+</div>
+<form method="GET" action="/admin/empreendedores" class="row g-2 mb-4 bg-white p-3 rounded shadow-sm">
+  <div class="col-md-6">
+    <input type="text" name="pesquisa" class="form-control" placeholder="Buscar por nome do negócio..." value="<%= pesquisa || '' %>">
+  </div>
+  <div class="col-md-4">
+    <select name="categoria" class="form-select">
+      <option value="">Todas as Categorias</option>
+      <option value="Padaria Artesanal" <%= categoria === 'Padaria Artesanal' ? 'selected' : '' %>>Padaria Artesanal</option>
+      <option value="Produtos Coloniais" <%= categoria === 'Produtos Coloniais' ? 'selected' : '' %>>Produtos Coloniais</option>
+      <option value="Serviços" <%= categoria === 'Serviços' ? 'selected' : '' %>>Serviços</option>
+      <option value="Alimentação" <%= categoria === 'Alimentação' ? 'selected' : '' %>>Alimentação</option>
+    </select>
+  </div>
+  <div class="col-md-2 d-grid">
+    <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> Filtrar</button>
+  </div>
+</form>
+<div class="table-responsive bg-white rounded shadow-sm">
+  <table class="table table-hover align-middle mb-0">
+    <thead class="table-light">
+      <tr>
+        <th>Negócio</th>
+        <th>Proprietário</th>
+        <th>Categoria</th>
+        <th>Bairro</th>
+        <th>Status</th>
+        <th class="text-end">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% empreendedores.forEach(emp => { %>
+        <tr>
+          <td class="fw-semibold"><%= emp.nomeNegocio %></td>
+          <td><%= emp.proprietario %></td>
+          <td><span class="badge bg-secondary"><%= emp.categoria %></span></td>
+          <td><%= emp.bairro %></td>
+          <td>
+            <span class="badge <%= emp.status === 'Ativo' ? 'bg-success' : 'bg-warning text-dark' %>">
+              <%= emp.status %>
+            </span>
+          </td>
+          <td class="text-end">
+            <a href="/admin/empreendedores/editar/<%= emp._id %>" class="btn btn-sm btn-outline-primary">
+              <i class="bi bi-pencil"></i>
+            </a>
+            <form action="/admin/empreendedores/excluir/<%= emp._id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Deseja realmente excluir este registro?');">
+              <button type="submit" class="btn btn-sm btn-outline-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('../../partials/adminFooter') %>

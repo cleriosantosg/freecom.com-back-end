@@ -1,0 +1,32 @@
+<%- include('../partials/adminHeader') %>
+<h2 class="mb-4 fw-bold text-dark">Dashboard Administrativo</h2>
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm border-start border-success border-4">
+      <div class="card-body">
+        <h6 class="text-muted text-uppercase">Empreendedores</h6>
+        <h2 class="fw-bold"><%= totalEmpreendedores %></h2>
+        <a href="/admin/empreendedores" class="btn btn-sm btn-success mt-2">Gerenciar</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm border-start border-primary border-4">
+      <div class="card-body">
+        <h6 class="text-muted text-uppercase">Produtos & Serviços</h6>
+        <h2 class="fw-bold"><%= totalProdutos %></h2>
+        <a href="/admin/produtos" class="btn btn-sm btn-primary mt-2">Gerenciar</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm border-start border-warning border-4">
+      <div class="card-body">
+        <h6 class="text-muted text-uppercase">Categorias Locais</h6>
+        <h2 class="fw-bold"><%= totalCategorias %></h2>
+        <a href="/admin/categorias" class="btn btn-sm btn-warning mt-2">Gerenciar</a>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/adminFooter') %>

@@ -1,0 +1,63 @@
+<%- include('../../partials/adminHeader') %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="fw-bold">Gerenciar Produtos & Serviços</h3>
+  <a href="/admin/produtos/novo" class="btn btn-primary">
+    <i class="bi bi-plus-circle me-1"></i> Novo Produto/Serviço
+  </a>
+</div>
+<form method="GET" action="/admin/produtos" class="row g-2 mb-4 bg-white p-3 rounded shadow-sm">
+  <div class="col-md-6">
+    <input type="text" name="pesquisa" class="form-control" placeholder="Buscar por título..." value="<%= pesquisa || '' %>">
+  </div>
+  <div class="col-md-4">
+    <select name="categoria" class="form-select">
+      <option value="">Todas as Categorias</option>
+      <% categorias.forEach(cat => { %>
+        <option value="<%= cat.nome %>" <%= categoria === cat.nome ? 'selected' : '' %>><%= cat.nome %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="col-md-2 d-grid">
+    <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> Filtrar</button>
+  </div>
+</form>
+<div class="table-responsive bg-white rounded shadow-sm">
+  <table class="table table-hover align-middle mb-0">
+    <thead class="table-light">
+      <tr>
+        <th>Produto / Serviço</th>
+        <th>Preço</th>
+        <th>Categoria</th>
+        <th>Empreendedor</th>
+        <th>Status</th>
+        <th class="text-end">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% produtos.forEach(prod => { %>
+        <tr>
+          <td class="fw-semibold"><%= prod.titulo %></td>
+          <td>R$ <%= prod.preco.toFixed(2).replace('.', ',') %></td>
+          <td><span class="badge bg-secondary"><%= prod.categoria %></span></td>
+          <td><%= prod.empreendedorNome %></td>
+          <td>
+            <span class="badge <%= prod.disponivel ? 'bg-success' : 'bg-danger' %>">
+              <%= prod.disponivel ? 'Disponível' : 'Indisponível' %>
+            </span>
+          </td>
+          <td class="text-end">
+            <a href="/admin/produtos/editar/<%= prod._id %>" class="btn btn-sm btn-outline-primary">
+              <i class="bi bi-pencil"></i>
+            </a>
+            <form action="/admin/produtos/excluir/<%= prod._id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Deseja realmente excluir este item?');">
+              <button type="submit" class="btn btn-sm btn-outline-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('../../partials/adminFooter') %>

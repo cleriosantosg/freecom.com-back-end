@@ -1,0 +1,47 @@
+<%- include('../../partials/adminHeader') %>
+<h3 class="fw-bold mb-3">Editar Empreendedor</h3>
+<form action="/admin/empreendedores/editar/<%= empreendedor._id %>?_method=PUT" method="POST" class="bg-white p-4 rounded shadow-sm">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nome do Negócio</label>
+      <input type="text" name="nomeNegocio" class="form-control" value="<%= empreendedor.nomeNegocio %>" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Nome do Proprietário</label>
+      <input type="text" name="proprietario" class="form-control" value="<%= empreendedor.proprietario %>" required>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Categoria</label>
+      <select name="categoria" class="form-select" required>
+        <option value="Padaria Artesanal" <%= empreendedor.categoria === 'Padaria Artesanal' ? 'selected' : '' %>>Padaria Artesanal</option>
+        <option value="Produtos Coloniais" <%= empreendedor.categoria === 'Produtos Coloniais' ? 'selected' : '' %>>Produtos Coloniais</option>
+        <option value="Serviços" <%= empreendedor.categoria === 'Serviços' ? 'selected' : '' %>>Serviços</option>
+        <option value="Alimentação" <%= empreendedor.categoria === 'Alimentação' ? 'selected' : '' %>>Alimentação</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Telefone / WhatsApp</label>
+      <input type="text" name="telefone" class="form-control" value="<%= empreendedor.telefone %>" required>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Bairro / Localidade</label>
+      <input type="text" name="bairro" class="form-control" value="<%= empreendedor.bairro %>" required>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Status</label>
+      <select name="status" class="form-select">
+        <option value="Ativo" <%= empreendedor.status === 'Ativo' ? 'selected' : '' %>>Ativo</option>
+        <option value="Inativo" <%= empreendedor.status === 'Inativo' ? 'selected' : '' %>>Inativo</option>
+      </select>
+    </div>
+    <div class="col-12">
+      <label class="form-label">Descrição do Negócio</label>
+      <textarea name="descricao" rows="3" class="form-control"><%= empreendedor.descricao %></textarea>
+    </div>
+  </div>
+  <div class="mt-4">
+    <button type="submit" class="btn btn-primary">Atualizar Dados</button>
+    <a href="/admin/empreendedores" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>
+<%- include('../../partials/adminFooter') %>

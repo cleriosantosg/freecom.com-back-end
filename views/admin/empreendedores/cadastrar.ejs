@@ -1,0 +1,40 @@
+<%- include('../../partials/adminHeader') %>
+<h3 class="fw-bold mb-3">Cadastrar Novo Empreendedor</h3>
+<form action="/admin/empreendedores/novo" method="POST" class="bg-white p-4 rounded shadow-sm">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nome do Negócio</label>
+      <input type="text" name="nomeNegocio" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Nome do Proprietário</label>
+      <input type="text" name="proprietario" class="form-control" required>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Categoria</label>
+      <select name="categoria" class="form-select" required>
+        <option value="Padaria Artesanal">Padaria Artesanal</option>
+        <option value="Produtos Coloniais">Produtos Coloniais</option>
+        <option value="Serviços">Serviços</option>
+        <option value="Alimentação">Alimentação</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Telefone / WhatsApp</label>
+      <input type="text" name="telefone" class="form-control" required>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Bairro / Localidade</label>
+      <input type="text" name="bairro" class="form-control" required>
+    </div>
+    <div class="col-12">
+      <label class="form-label">Descrição do Negócio</label>
+      <textarea name="descricao" rows="3" class="form-control"></textarea>
+    </div>
+  </div>
+  <div class="mt-4">
+    <button type="submit" class="btn btn-success">Salvar Cadastro</button>
+    <a href="/admin/empreendedores" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>
+<%- include('../../partials/adminFooter') %>

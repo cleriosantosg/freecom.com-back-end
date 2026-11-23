@@ -1,0 +1,45 @@
+<%- include('../../partials/adminHeader') %>
+<h3 class="fw-bold mb-3">Cadastrar Novo Produto / Serviço</h3>
+<form action="/admin/produtos/novo" method="POST" class="bg-white p-4 rounded shadow-sm">
+  <div class="row g-3">
+    <div class="col-md-8">
+      <label class="form-label">Título do Produto ou Serviço</label>
+      <input type="text" name="titulo" class="form-control" required>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Preço (R$)</label>
+      <input type="number" step="0.01" name="preco" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Categoria</label>
+      <select name="categoria" class="form-select" required>
+        <% categorias.forEach(cat => { %>
+          <option value="<%= cat.nome %>"><%= cat.nome %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Empreendedor Responsável</label>
+      <select name="empreendedorNome" class="form-select" required>
+        <% empreendedores.forEach(emp => { %>
+          <option value="<%= emp.nomeNegocio %>"><%= emp.nomeNegocio %> (<%= emp.proprietario %>)</option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="col-12">
+      <label class="form-label">Descrição</label>
+      <textarea name="descricao" rows="3" class="form-control"></textarea>
+    </div>
+    <div class="col-12">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="disponivel" id="disponivel" checked>
+        <label class="form-check-label" for="disponivel">Disponível na Vitrine</label>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4">
+    <button type="submit" class="btn btn-primary">Salvar Produto</button>
+    <a href="/admin/produtos" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>
+<%- include('../../partials/adminFooter') %>

@@ -1,0 +1,29 @@
+<%- include('../../partials/adminHeader') %>
+<h3 class="fw-bold mb-3">Cadastrar Nova Categoria</h3>
+<form action="/admin/categorias/novo" method="POST" class="bg-white p-4 rounded shadow-sm">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nome da Categoria</label>
+      <input type="text" name="nome" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Classe do Ícone (Bootstrap Icons)</label>
+      <input type="text" name="icone" class="form-control" value="bi-shop" placeholder="Ex: bi-basket, bi-cup-hot, bi-tools">
+    </div>
+    <div class="col-12">
+      <label class="form-label">Descrição</label>
+      <textarea name="descricao" rows="2" class="form-control"></textarea>
+    </div>
+    <div class="col-12">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="ativa" id="ativa" checked>
+        <label class="form-check-label" for="ativa">Categoria Ativa na Vitrine</label>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4">
+    <button type="submit" class="btn btn-warning">Salvar Categoria</button>
+    <a href="/admin/categorias" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>
+<%- include('../../partials/adminFooter') %>
